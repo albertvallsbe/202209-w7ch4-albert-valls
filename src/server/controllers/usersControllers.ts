@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import type { NextFunction, Request, Response } from "express";
 import { loginErrors } from "../../CustomError/errors.js";
 import User from "../../database/models/User.js";
@@ -15,6 +16,11 @@ export const loginUser = async (
 
     if (!user) {
       next(loginErrors.userNotFound);
+      return;
+    }
+
+    if (!(await bcrypt.compare(password, user.password))) {
+      next(loginErrors.incorrectPassword);
       return;
     }
   } catch (error: unknown) {

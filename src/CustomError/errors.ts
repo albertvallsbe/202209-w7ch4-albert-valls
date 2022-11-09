@@ -6,4 +6,10 @@ export const loginErrors = {
     401,
     "Incorrect username or password"
   ),
+
+  incorrectPassword: new CustomError(
+    "Incorrect password",
+    401,
+    "Incorrect username or password"
+  ),
 };
