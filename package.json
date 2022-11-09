@@ -9,8 +9,8 @@
     "build:dev": "tsc -w",
     "start": "node .",
     "start:dev": "node --watch .",
-    "test": "jest --passWithNoTests",
-    "test:coverage": "jest --coverage --passWithNoTests",
+    "test": "jest",
+    "test:coverage": "jest --coverage ",
     "test:dev": "jest --watchAll",
     "prepare": "husky install"
   },
@@ -21,6 +21,7 @@
     "@types/chalk": "^2.2.0",
     "@types/debug": "^4.1.7",
     "@types/express": "^4.17.14",
+    "@types/jest": "^29.2.2",
     "@types/morgan": "^1.9.3",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
