@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from "express";
 import debugConfig from "debug";
 import type CustomError from "../../CustomError/CustomError";
 import chalk from "chalk";
+import { ValidationError } from "express-validation";
 
 const debug = debugConfig("items:server:middleware:errors");
 
@@ -13,6 +14,16 @@ export const generalError = (
   // eslint-disable-next-line no-unused-vars
   next: NextFunction
 ) => {
+  if (error instanceof ValidationError) {
+    debug(
+      chalk.red(
+        (error as ValidationError).details.body
+          .map((error) => error.message)
+          .join("\n")
+      )
+    );
+  }
+
   const { message, publicMessage, statusCode } = error;
   debug(chalk.red(message));
   const responseMessage = publicMessage || "There was an error on the server";
