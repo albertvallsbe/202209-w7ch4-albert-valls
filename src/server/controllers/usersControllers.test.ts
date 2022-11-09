@@ -1,10 +1,11 @@
 import bcrypt from "bcryptjs";
 import type { Response, Request, NextFunction } from "express";
 import User from "../../database/models/User";
-import { loginUser } from "./usersControllers";
+import { loginUser, registerUser } from "./usersControllers";
 import { loginErrors } from "../../CustomError/errors";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import CustomError from "../../CustomError/CustomError";
 
 beforeEach(() => jest.clearAllMocks());
 
@@ -89,6 +90,52 @@ describe("Given a loginUser controller", () => {
       await loginUser(req as Request, res as Response, next as NextFunction);
 
       expect(next).toHaveBeenCalledWith(error);
+    });
+  });
+});
+
+describe("Given a registerUsers controller", () => {
+  describe("When it receives a request with username 'admin', password: 'admin123' and email 'admin@items.com' and a next function", () => {
+    test("Then it should call next with status 409 and public message 'User already registered'", async () => {
+      const user = {
+        username: "admin",
+        password: "admin123",
+        email: "admin@items.com",
+      };
+      req.body = user;
+      const error = new CustomError(
+        "duplicate key",
+        409,
+        "User already registered"
+      );
+      bcrypt.hash = jest.fn().mockResolvedValueOnce(user.password);
+      User.create = jest.fn().mockRejectedValueOnce(error);
+
+      await registerUser(req as Request, null, next as NextFunction);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it receives a request with username 'newuser', password '12345abc' and email 'newuser@gmail.com' in the body and a response", () => {
+    test("Then it should call the response's status method with 201 and json method with the new user's details", async () => {
+      const user = {
+        username: "newuser",
+        password: "12345abc",
+        email: "newuser@gmail.com",
+      };
+      const expectedStatus = 201;
+      req.body = user;
+      const userId = new mongoose.Types.ObjectId();
+      bcrypt.hash = jest.fn().mockResolvedValueOnce(user.password);
+      User.create = jest.fn().mockResolvedValueOnce({ ...user, _id: userId });
+
+      await registerUser(req as Request, res as Response, next as NextFunction);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith({
+        user: { username: user.username, email: user.email, id: userId },
+      });
     });
   });
 });
