@@ -22,6 +22,8 @@ export const generalError = (
           .join("\n")
       )
     );
+    error.publicMessage =
+      "The details you provided don't meet the requirements";
   }
 
   const { message, publicMessage, statusCode } = error;
