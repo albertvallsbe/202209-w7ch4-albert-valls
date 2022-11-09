@@ -75,7 +75,7 @@ describe("Given a loginUser controller", () => {
     });
   });
 
-  describe("When it receives a request, response and next function and bcrypt rejects", () => {
+  describe("When it receives a request, response and next function and password comparing fails", () => {
     test("Then next should be called", async () => {
       const error = new Error();
       const user = {
@@ -136,6 +136,30 @@ describe("Given a registerUsers controller", () => {
       expect(res.json).toHaveBeenCalledWith({
         user: { username: user.username, email: user.email, id: userId },
       });
+    });
+  });
+
+  describe("When it receives a request and a next function and password hashing fails", () => {
+    test("Then it should invoke next with an error with status 500 and public message 'Couldn't create user'", async () => {
+      const user = {
+        username: "newuser",
+        password: "12345abc",
+        email: "newuser@gmail.com",
+      };
+      const statusCode = 500;
+      const publicMessage = "Couldn't create user";
+      const error = new CustomError(
+        "Couldn't hash password",
+        statusCode,
+        publicMessage
+      );
+      req.body = user;
+
+      bcrypt.hash = jest.fn().mockRejectedValueOnce(error);
+
+      await registerUser(req as Request, null, next as NextFunction);
+
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
