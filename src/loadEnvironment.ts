@@ -7,4 +7,5 @@ export const {
   PORT: port,
   JWT_SECRET: jwtSecret,
   DEBUG: debug,
+  MONGO_DEBUG: mongoDebug,
 } = process.env;
