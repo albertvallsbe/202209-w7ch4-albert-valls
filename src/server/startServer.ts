@@ -1,3 +1,4 @@
+import "../loadEnvironment.js";
 import type { Express } from "express";
 
 const startServer = async (app: Express, port: number) =>
