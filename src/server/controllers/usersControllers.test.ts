@@ -73,4 +73,22 @@ describe("Given a loginUser controller", () => {
       expect(res.json).toHaveBeenCalledWith({ token });
     });
   });
+
+  describe("When it receives a request, response and next function and bcrypt rejects", () => {
+    test("Then next should be called", async () => {
+      const error = new Error();
+      const user = {
+        username: "admin",
+        password: "admin",
+      };
+      const userId = new mongoose.Types.ObjectId();
+      req.body = user;
+      User.findOne = jest.fn().mockResolvedValueOnce({ ...user, _id: userId });
+      bcrypt.compare = jest.fn().mockRejectedValueOnce(error);
+
+      await loginUser(req as Request, res as Response, next as NextFunction);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
 });
