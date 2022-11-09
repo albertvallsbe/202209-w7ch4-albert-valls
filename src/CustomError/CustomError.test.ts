@@ -1,4 +1,3 @@
-import e from "express";
 import CustomError from "./CustomError";
 
 describe("Given the class CustomError", () => {
