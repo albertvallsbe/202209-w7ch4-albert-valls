@@ -7,6 +7,11 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
 
     if (!authHeader) {
       next(authErrors.noTokenProvided);
+      return;
+    }
+
+    if (!authHeader.startsWith("Bearer")) {
+      next(authErrors.missingBearer);
     }
   } catch {}
 };

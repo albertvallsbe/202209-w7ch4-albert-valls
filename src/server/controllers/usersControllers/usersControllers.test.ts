@@ -1,11 +1,11 @@
 import bcrypt from "bcryptjs";
 import type { Response, Request, NextFunction } from "express";
-import User from "../../database/models/User";
+import User from "../../../database/models/User";
 import { loginUser, registerUser } from "./usersControllers";
-import { loginErrors } from "../../CustomError/errors";
+import { loginErrors } from "../../../CustomError/errors";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-import CustomError from "../../CustomError/CustomError";
+import CustomError from "../../../CustomError/CustomError";
 
 beforeEach(() => jest.clearAllMocks());
 

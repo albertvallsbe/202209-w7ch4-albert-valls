@@ -1,16 +1,16 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import type { NextFunction, Request, Response } from "express";
-import { loginErrors } from "../../CustomError/errors.js";
-import User from "../../database/models/User.js";
+import { loginErrors } from "../../../CustomError/errors.js";
+import User from "../../../database/models/User.js";
 import type {
   LoginUserBody,
   RegisterUserBody,
   UserTokenPayload,
 } from "./types.js";
 
-import { jwtSecret } from "../../loadEnvironment.js";
-import CustomError from "../../CustomError/CustomError.js";
+import { jwtSecret } from "../../../loadEnvironment.js";
+import CustomError from "../../../CustomError/CustomError.js";
 
 export const loginUser = async (
   req: Request,

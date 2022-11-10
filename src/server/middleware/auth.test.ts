@@ -18,4 +18,16 @@ describe("Given the auth middleware", () => {
       expect(next).toHaveBeenCalledWith(expectedError);
     });
   });
+
+  describe("When it receives a request with Authorization header '1234'", () => {
+    test("Then it should invoke next with an error with status code 401 and public message 'Bad Token'", () => {
+      const expectedError = authErrors.missingBearer;
+
+      req.header = jest.fn().mockReturnValueOnce("1234");
+
+      auth(req as Request, null, next as NextFunction);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
 });
