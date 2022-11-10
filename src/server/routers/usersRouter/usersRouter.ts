@@ -3,11 +3,11 @@ import { validate } from "express-validation";
 import {
   loginUser,
   registerUser,
-} from "../controllers/usersControllers/usersControllers.js";
-import userLoginSchema from "../schemas/userLoginSchema.js";
-import userRegisterSchema from "../schemas/userRegisterSchema.js";
+} from "../../controllers/usersControllers/usersControllers.js";
+import userLoginSchema from "../../schemas/userLoginSchema.js";
+import userRegisterSchema from "../../schemas/userRegisterSchema.js";
 
-import usersRoutes from "./usersRoutes.js";
+import usersRoutes from "../routes/usersRoutes.js";
 
 const { login, register } = usersRoutes;
 
