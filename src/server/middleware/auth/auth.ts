@@ -1,12 +1,12 @@
 import type { NextFunction, Response } from "express";
-import { authErrors } from "../../../CustomError/errors";
-import { jwtSecret } from "../../../loadEnvironment";
+import { authErrors } from "../../../CustomError/errors.js";
+import { jwtSecret } from "../../../loadEnvironment.js";
 import type {
   CustomRequest,
   UserTokenPayload,
 } from "../../controllers/usersControllers/types";
 import jwt from "jsonwebtoken";
-import CustomError from "../../../CustomError/CustomError";
+import CustomError from "../../../CustomError/CustomError.js";
 
 export const auth = (req: CustomRequest, res: Response, next: NextFunction) => {
   try {

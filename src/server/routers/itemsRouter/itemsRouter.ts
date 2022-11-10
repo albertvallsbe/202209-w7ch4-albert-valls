@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getUserItems } from "../../controllers/itemsControllers/itemsControllers";
-import { auth } from "../../middleware/auth/auth";
-import itemsRoutes from "../routes/itemsRoutes";
+import { getUserItems } from "../../controllers/itemsControllers/itemsControllers.js";
+import { auth } from "../../middleware/auth/auth.js";
+import itemsRoutes from "../routes/itemsRoutes.js";
 
 const { list } = itemsRoutes;
 
