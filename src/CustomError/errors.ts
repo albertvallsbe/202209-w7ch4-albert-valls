@@ -13,3 +13,13 @@ export const loginErrors = {
     "Incorrect username or password"
   ),
 };
+
+export const authErrors = {
+  noTokenProvided: new CustomError(
+    "No token provided",
+    401,
+    "No token provided"
+  ),
+
+  missingBearer: new CustomError("Missing Bearer in token", 401, "Bad token"),
+};
