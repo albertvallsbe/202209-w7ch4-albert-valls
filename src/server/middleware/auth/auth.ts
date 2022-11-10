@@ -1,10 +1,7 @@
 import type { NextFunction, Response } from "express";
 import { authErrors } from "../../../CustomError/errors.js";
 import { jwtSecret } from "../../../loadEnvironment.js";
-import type {
-  CustomRequest,
-  UserTokenPayload,
-} from "../../controllers/usersControllers/types";
+import type { CustomRequest, UserTokenPayload } from "../../../types";
 import jwt from "jsonwebtoken";
 import CustomError from "../../../CustomError/CustomError.js";
 

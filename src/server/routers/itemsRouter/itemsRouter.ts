@@ -1,13 +1,16 @@
 import { Router } from "express";
-import { getUserItems } from "../../controllers/itemsControllers/itemsControllers.js";
-import { auth } from "../../middleware/auth/auth.js";
+import {
+  createItem,
+  getUserItems,
+} from "../../controllers/itemsControllers/itemsControllers.js";
 import itemsRoutes from "../routes/itemsRoutes.js";
 
-const { list } = itemsRoutes;
+const { list, newitem } = itemsRoutes;
 
 // eslint-disable-next-line new-cap
 const itemsRouter = Router();
 
-itemsRouter.get(list, auth, getUserItems);
+itemsRouter.get(list, getUserItems);
+itemsRouter.post(newitem, createItem);
 
 export default itemsRouter;

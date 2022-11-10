@@ -1,7 +1,7 @@
 import type { Request, NextFunction } from "express";
 import mongoose from "mongoose";
 import { authErrors } from "../../../CustomError/errors";
-import type { CustomRequest } from "../../controllers/usersControllers/types";
+import type { CustomRequest } from "../../../types";
 import { auth } from "./auth";
 import jwt from "jsonwebtoken";
 

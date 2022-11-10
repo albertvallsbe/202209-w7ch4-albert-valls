@@ -1,17 +1,16 @@
-import type { NextFunction, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import CustomError from "../../../CustomError/CustomError.js";
+import type { ItemStructure } from "../../../database/models/Item.js";
 import Item from "../../../database/models/Item.js";
-import type { CustomRequest } from "../usersControllers/types.js";
+import type { CustomRequest } from "../../../types.js";
 
 export const getUserItems = async (
   req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req;
-
   try {
-    const items = await Item.find({ owner: userId });
+    const items = await Item.find({});
 
     res.status(200).json({ items });
   } catch (error: unknown) {
@@ -23,4 +22,14 @@ export const getUserItems = async (
       )
     );
   }
+};
+
+export const createItem = async (req: Request, res: Response) => {
+  const { name } = req.body as ItemStructure;
+
+  const createdItem = await Item.create({
+    name,
+  });
+
+  res.status(201).json({ createdItem });
 };

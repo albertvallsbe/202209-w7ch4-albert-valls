@@ -1,16 +1,21 @@
+import type { InferSchemaType } from "mongoose";
 import { Schema, model } from "mongoose";
 
-const itemSchema = new Schema({
+const ItemSchema = new Schema({
+  picture: {
+    type: String,
+  },
   name: {
     type: String,
     required: true,
   },
   owner: {
     type: Schema.Types.ObjectId,
-    required: true,
   },
 });
 
-const Item = model("Item", itemSchema, "items");
+export type ItemStructure = InferSchemaType<typeof ItemSchema>;
+
+const Item = model("Item", ItemSchema, "items");
 
 export default Item;

@@ -3,14 +3,13 @@ import bcrypt from "bcryptjs";
 import type { NextFunction, Request, Response } from "express";
 import { loginErrors } from "../../../CustomError/errors.js";
 import User from "../../../database/models/User.js";
-import type {
-  LoginUserBody,
-  RegisterUserBody,
-  UserTokenPayload,
-} from "./types.js";
-
 import { jwtSecret } from "../../../loadEnvironment.js";
 import CustomError from "../../../CustomError/CustomError.js";
+import type {
+  LoginUserBody,
+  UserTokenPayload,
+  RegisterUserBody,
+} from "../../../types.js";
 
 export const loginUser = async (
   req: Request,
@@ -45,8 +44,6 @@ export const loginUser = async (
   } catch (error: unknown) {
     next(error);
   }
-
-  res.status(200).json();
 };
 
 export const registerUser = async (
