@@ -1,7 +1,7 @@
 import type { NextFunction, Response } from "express";
-import CustomError from "../../../CustomError/CustomError";
-import Item from "../../../database/models/Item";
-import type { CustomRequest } from "../usersControllers/types";
+import CustomError from "../../../CustomError/CustomError.js";
+import Item from "../../../database/models/Item.js";
+import type { CustomRequest } from "../usersControllers/types.js";
 
 export const getUserItems = async (
   req: CustomRequest,
