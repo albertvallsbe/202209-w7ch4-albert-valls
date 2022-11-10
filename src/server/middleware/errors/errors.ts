@@ -1,7 +1,7 @@
-import "../../loadEnvironment.js";
+import "../../../loadEnvironment.js";
 import type { Request, Response, NextFunction } from "express";
 import debugConfig from "debug";
-import type CustomError from "../../CustomError/CustomError";
+import type CustomError from "../../../CustomError/CustomError";
 import chalk from "chalk";
 import { ValidationError } from "express-validation";
 

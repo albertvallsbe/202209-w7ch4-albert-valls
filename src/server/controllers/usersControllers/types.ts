@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import type { JwtPayload } from "jsonwebtoken";
 
 export interface LoginUserBody {
@@ -12,4 +13,8 @@ export interface UserTokenPayload extends JwtPayload {
 
 export interface RegisterUserBody extends LoginUserBody {
   email: string;
+}
+
+export interface CustomRequest extends Request {
+  userId: string;
 }
